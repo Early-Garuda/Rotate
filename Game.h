@@ -11,12 +11,17 @@ public:
 	Game(RenderWindow &window, int width, int height);
 	~Game();
 
+	platform plat;
 	void run(RenderWindow &window);
 	Font mFont;
 	Text mText;
 	int gameState;
-	
-	platform p1;
+	int speed;
+
+	bool isColliding;
+
+	bool isCollidingUp;
+
 private:
 	void processEvents(RenderWindow &window);
 	void update(Time elapsedTime);
