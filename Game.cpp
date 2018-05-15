@@ -24,7 +24,7 @@ Game::Game(RenderWindow & window, int width, int height)
 
 	ball.setFillColor(Color::White);
 	ball.setPosition(Vector2f(300, 200));
-
+	speed = 5;
 }
 
 void Game::run(RenderWindow &window)
@@ -77,17 +77,76 @@ void Game::update(Time elapsedTime)
 		}
 		break;
 	case 2:
-		if (Keyboard::isKeyPressed(Keyboard::Key::Left))
-		{
-			box.rotate(-0.4);
-		}
+		
+
 		if (ball.getGlobalBounds().intersects(box.getGlobalBounds()))
 		{
 			ball.setPosition(600, 200);
 		}
-		p1.update(0);
+
+		if (box.getGlobalBounds().intersects(plat.getRectangle().getGlobalBounds()))
+		{
+			isColliding = true;
+		}
+		else
+		{
+			isColliding = false;
+		}
+
+
+
+		if (Keyboard::isKeyPressed(Keyboard::A) && !isColliding)
+		{
+			box.move(-speed, 0);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D) && !isColliding)
+		{
+			box.move(speed, 0);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D) && isColliding)
+		{
+			box.move(0, 0);
+		}
+
+		if (Keyboard::isKeyPressed(Keyboard::W) && !isColliding)
+		{
+			box.move(0, -speed);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S) && !isColliding)
+		{
+			box.move(0, speed);
+		}
+		
+		
+
+		if (Keyboard::isKeyPressed(Keyboard::U))
+		{
+			plat.update(elapsedTime.asSeconds());
+		}
+
 		break;
+	
+		//p1.update(0);
+		
 	default:
+		/*
+		{Speed.x = 0 Speed.y = 0}
+
+		if D pressed {speed.x = 5}
+		if A pressed {speed.x = -5}
+		if W pressed {speed.y = 5}
+		if S pressed {speed.y = -5}
+
+		if speed.x < 0 -> going left
+		if speed.x > 0 -> going right
+		if speed.y < 0 -> going up
+		if speed.y > 0 -> going down
+
+
+		
+		box.move(Speed.x, Speed.y);
+		
+		*/
 		break;
 	}
 }
@@ -104,7 +163,7 @@ void Game::render(RenderWindow &window)
 		window.clear(sf::Color::Green);
 		window.draw(box);
 		window.draw(ball);
-		p1.draw(window);
+		plat.draw(window);
 		break;
 
 	}

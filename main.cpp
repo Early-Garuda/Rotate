@@ -3,8 +3,9 @@
 
 int main()
 {
-	sf::Vector2f wSize(800, 800);
-	sf::RenderWindow myWindow(sf::VideoMode(wSize.x, wSize.y), "EGGS Presents");;
+	sf::Vector2f wSize(1000, 900);
+	sf::RenderWindow myWindow(sf::VideoMode(wSize.x, wSize.y), "EGGS Presents");
+
 
 	
 	Game myGame(myWindow, wSize.x, wSize.y);

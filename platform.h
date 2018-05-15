@@ -9,13 +9,19 @@ public:
 	platform();
 	~platform();
 
+	RectangleShape getRectangle();
 
 	void update(float dt);
 	void draw(RenderWindow &window);
 
 private:
+	
 	RectangleShape platRect;
-	Vector2f platPosition [MAX_PLATFORMS];
+	RectangleShape platRectStatic;
+	RectangleShape platRectStatic2;
+
+
+	//Vector2f platPosition [MAX_PLATFORMS];
 	Vector2f platSize;
 	float platRotation;
 };
